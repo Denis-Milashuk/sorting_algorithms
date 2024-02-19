@@ -10,7 +10,7 @@ import static java.lang.StringTemplate.STR;
 public class Main {
     private final Comparator<Integer> longComparator = (Integer v1, Integer v2) -> {
         try {
-            Thread.sleep(0, 500_000);
+            Thread.sleep(0, 100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -20,9 +20,8 @@ public class Main {
     public static void main(String[] args) {
 
         var main = new Main();
-        main.runWithExecutionTime(main.getRandomIntArr(), new BubbleAltSorter1());
         main.runWithExecutionTime(main.getRandomIntArr(), new BubbleSorter());
-        main.runWithExecutionTime(main.getRandomIntArr(), new SelectionSorter());
+        main.runWithExecutionTime(main.getRandomIntArr(), new InsertionSorter());
     }
 
     private void runWithExecutionTime(Integer[] arr, Sorter sorter) {
@@ -37,6 +36,6 @@ public class Main {
 
     private Integer[] getRandomIntArr() {
         var randomGenerator = RandomGenerator.getDefault();
-        return randomGenerator.ints(0, 500).limit(200).boxed().toArray(Integer[]::new);
+        return randomGenerator.ints(0, 10000).limit(1000).boxed().toArray(Integer[]::new);
     }
 }
